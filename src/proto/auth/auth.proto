@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package auth;
+option go_package = "/src/proto/auth"; 
+
+service AuthService {
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc Validate(ValidateRequest) returns (ValidateResponse) {}
+}
+// Register
+
+message RegisterRequest {
+  string phoneNumber = 1;
+  string password = 3;
+
+}
+
+message RegisterResponse {
+  int64 ressponseCode = 1;
+  string responseMessage = 2;
+  string responseData = 3;
+}
+// Login
+
+message LoginRequest {
+  string phoneNumber = 1;
+  string password = 2;
+}
+message LoginResponse {
+  int64 ressponseCode = 1;
+  string responseMessage = 2;
+  TokenLogin responseData = 3;
+}
+// Validate
+
+message ValidateRequest { string token = 1; }
+
+message ValidateResponse{
+  int64 ressponseCode = 1;
+  string responseMessage = 2;
+  int64 userId = 3;
+}
+// Additional
+message TokenLogin {
+  string token = 1;
+  string phoneNumber = 2;
+}
